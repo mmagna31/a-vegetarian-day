@@ -18,6 +18,7 @@ import {
   selectTotalResults,
   fetchByIngredientsFirst,
   fetchByIngredientsNext,
+  selectNextIngredients,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
 import RecipesList from "../features/recipes/RecipesList";
@@ -34,8 +35,7 @@ const YourFridge = () => {
   const recipes = useSelector(selectRecipes);
   const totalRecipes = useSelector(selectTotalResults);
   const [errorPage, setErrorPage] = useState(null);
-
-  // const [ingredientsToSearch, setIngredientsToSearch] = useState(null);
+  const ingredientsToSearch = useSelector(selectNextIngredients);
 
   const firstLoad = useCallback(() => {
     if (ingredients.length === 0 && recipes.length === 0) {
@@ -61,17 +61,15 @@ const YourFridge = () => {
 
   const handleSearch = useCallback(() => {
     const ingredientsName = ingredients.map((ingredient) => ingredient.name);
-    // if (
-    //   JSON.stringify(ingredientsName) !== JSON.stringify(ingredientsToSearch)
-    // ) {
-    //   dispatch(cleanRecipes());
-    // }
-    // setIngredientsToSearch(ingredientsName);
+    if (
+      JSON.stringify(ingredientsName) !== JSON.stringify(ingredientsToSearch)
+    ) {
+      dispatch(cleanRecipes());
+    }
     dispatch(fetchByIngredientsFirst(ingredientsName));
-  }, [dispatch, ingredients]);
+  }, [dispatch, ingredients, ingredientsToSearch]);
 
   const handleDispatch = useCallback(() => {
-    console.log("on handle dispatch: dispatching fetchByIngredientsNext()");
     dispatch(fetchByIngredientsNext());
   }, [dispatch]);
 

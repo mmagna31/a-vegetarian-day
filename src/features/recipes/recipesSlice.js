@@ -101,5 +101,6 @@ export const selectStatus = (state) => state.recipes.status;
 export const selectTotalResults = (state) => state.recipes.totalResults;
 export const selectNextOffset = (state) => state.recipes.nextOffset;
 export const selectNumber = (state) => state.recipes.number;
+export const selectNextIngredients = (state) => state.recipes.nextIngredients;
 
 export default recipesSlice.reducer;

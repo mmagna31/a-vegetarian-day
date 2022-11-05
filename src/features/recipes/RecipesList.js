@@ -15,11 +15,8 @@ const RecipesList = ({ onDispatch }) => {
     (entries) => {
       const [entry] = entries;
       // entries.forEach((entry) => {
-      console.log("VISIBILE?", entry.isIntersecting, entry.target);
-      console.log("target", entry.target);
       if (entry.isIntersecting && totalResults > recipes.length) {
-        alert("onDispatch");
-        onDispatch(); //---------------------------------------------------------
+        onDispatch();
       }
       // });
     },
@@ -31,19 +28,17 @@ const RecipesList = ({ onDispatch }) => {
       rootMargin: "0px",
       threshold: 1.0,
     };
-    // let targetRef;
+    let targetRef;
 
     const observer = new IntersectionObserver(intersectionCallback, options);
 
     if (recipeRef.current) {
-      // targetRef = recipeRef.current;
-      // observer.observe(targetRef);
-      observer.observe(recipeRef.current);
+      targetRef = recipeRef.current;
+      observer.observe(targetRef);
     }
 
     return () => {
-      // if (targetRef) observer.unobserve(targetRef);
-      if (recipeRef.current) observer.unobserve(recipeRef.current);
+      if (targetRef) observer.unobserve(targetRef);
     };
   }, [recipeRef, intersectionCallback]);
 
