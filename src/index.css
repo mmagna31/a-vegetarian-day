@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+@font-face {
+  font-family: "Chalkboard";
+  src: local("Chalkboard"),
+    url("./fonts/Chalkboard/Chalkboard-Regular.ttf") format("truetype");
+  font-weight: regular;
+}
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-custom {
+  font-family: -apple-system, BlinkMacSystemFont, "Chalkboard",
+    "Roboto Condensed", sans-serif;
+}

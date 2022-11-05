@@ -1,0 +1,17 @@
+/* hide scrollbar but allow scrolling */
+.ingredientsContainer {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.ingredientsContainer::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.controlsBtn {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
