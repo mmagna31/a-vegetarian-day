@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { BiTimeFive } from "react-icons/bi";
+import { BiDish, BiTimeFive } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
-import { GiThreeLeaves, GiGrain, GiMeal } from "react-icons/gi";
+import { GiThreeLeaves, GiGrain } from "react-icons/gi";
 
 const RecipeSnippet = React.forwardRef(
   (
@@ -22,13 +22,13 @@ const RecipeSnippet = React.forwardRef(
       <Card ref={ref} style={{ width: "100%", height: "100%" }}>
         <Card.Img variant="top" src={image} />
         <Card.Body>
-          <Card.Title className="font-custom fw-bold text-truncate text-center fs-3">
+          <Card.Title className="font-custom text-truncate text-center fs-3">
             {title}
           </Card.Title>
           <Container>
             <Row>
               <Col>
-                <GiMeal size={30} />
+                <BiDish size={30} />
                 <span className="text-capitalize">{dishTypes?.join(", ")}</span>
               </Col>
             </Row>
