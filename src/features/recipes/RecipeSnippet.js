@@ -2,26 +2,45 @@ import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { BiTimeFive } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
-import { GiThreeLeaves, GiGrain } from "react-icons/gi";
+import { GiThreeLeaves, GiGrain, GiMeal } from "react-icons/gi";
 
 const RecipeSnippet = React.forwardRef(
   (
-    { title, image, readyInMinutes, veryPopular, vegan, glutenFree, dishTypes },
+    {
+      title,
+      image,
+      readyInMinutes,
+      veryPopular,
+      vegan,
+      glutenFree,
+      dishTypes,
+      summary,
+    },
     ref
   ) => {
     return (
-      <Card ref={ref} style={{ width: "100%" }}>
+      <Card ref={ref} style={{ width: "100%", height: "100%" }}>
         <Card.Img variant="top" src={image} />
         <Card.Body>
-          <Card.Title className="font-custom fw-bold">{title}</Card.Title>
+          <Card.Title className="font-custom fw-bold text-truncate text-center fs-3">
+            {title}
+          </Card.Title>
           <Container>
             <Row>
               <Col>
-                <BiTimeFive /> {readyInMinutes} Min
+                <GiMeal size={30} />
+                <span className="text-capitalize">{dishTypes?.join(", ")}</span>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <BiTimeFive size={30} />{" "}
+                <span className="fs-5">{readyInMinutes} Min</span>
               </Col>
               {veryPopular && (
                 <Col>
-                  <AiOutlineLike /> Very Popular
+                  <AiOutlineLike size={30} />{" "}
+                  <span className="fs-5">Very Popular</span>
                 </Col>
               )}
             </Row>
@@ -29,18 +48,17 @@ const RecipeSnippet = React.forwardRef(
               <Col>
                 {vegan && (
                   <span>
-                    <GiThreeLeaves /> Vegan
+                    <GiThreeLeaves size={30} />{" "}
+                    <span className="fs-5">Vegan</span>
                   </span>
                 )}{" "}
                 {glutenFree && (
                   <span>
-                    <GiGrain /> Gluten Free
+                    <GiGrain size={30} />{" "}
+                    <span className="fs-5">Gluten Free</span>
                   </span>
                 )}
               </Col>
-            </Row>
-            <Row>
-              <Col>Dish Types: {dishTypes?.join(", ")}</Col>
             </Row>
           </Container>
         </Card.Body>

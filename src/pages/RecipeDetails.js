@@ -31,7 +31,6 @@ const RecipeDetails = () => {
         setLoading(true);
 
         const data = await searchRecipesInformation(id);
-        console.log("DATA:", data);
         setData(data);
       } catch (err) {
         setError({ display: true, info: err });
@@ -64,8 +63,6 @@ const RecipeDetails = () => {
     extendedIngredients,
     analyzedInstructions,
   } = data;
-
-  console.log("title", title);
 
   if (loading) {
     return (

@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectRecipes, selectTotalResults } from "./recipesSlice";
+import WrappedLink from "../../components/WrappedLink";
 
 const RecipesList = ({ onDispatch }) => {
   const recipes = useSelector(selectRecipes);
@@ -50,12 +51,12 @@ const RecipesList = ({ onDispatch }) => {
           const lastId = recipes[recipes.length - 1].id;
           return (
             <Col key={id}>
-              <Link to={`/recipes/${id}`}>
+              <WrappedLink to={`/recipes/${id}`}>
                 <RecipeSnippet
                   ref={id === lastId ? recipeRef : null}
                   {...recipe}
                 />
-              </Link>
+              </WrappedLink>
             </Col>
           );
         })}
