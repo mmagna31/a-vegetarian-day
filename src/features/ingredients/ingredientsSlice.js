@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { searchIngredients } from "../../api/spoonacular";
+import { searchIngredients } from "../../api/repository";
 
 const initialState = {
   hints: [],
@@ -17,6 +17,7 @@ export const fetchHints = createAsyncThunk(
   async (value, { getState }) => {
     const { hintsNumber } = getState().ingredients;
     const response = await searchIngredients(value, hintsNumber);
+    console.log("response", response);
     return response.results;
   }
 );

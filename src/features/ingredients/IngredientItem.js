@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, ListGroup } from "react-bootstrap";
-import { getUrlImageIngredient } from "../../api/spoonacular";
+import { getUrlImageIngredient } from "../../api/repository";
 import styles from "./IngredientItem.module.css";
 
 export const IngredientItem = ({ name, image, handleClick }) => {

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   searchRandomRecipes,
   searchRecipesByIngredients,
-} from "../../api/spoonacular";
+} from "../../api/repository";
 
 const initialState = {
   recipes: [],

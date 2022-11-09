@@ -1,27 +1,21 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import RecipeSnippet from "./RecipeSnippet";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectRecipes, selectTotalResults } from "./recipesSlice";
 import WrappedLink from "../../components/WrappedLink";
 
-const RecipesList = ({ onDispatch }) => {
-  const recipes = useSelector(selectRecipes);
-  const totalResults = useSelector(selectTotalResults);
-
+const RecipesList = ({ recipes, totalRecipes, onDispatch }) => {
   const recipeRef = useRef(null); // ref assegnato ad ultima ricetta per eseguire intersectionCallback
 
   const intersectionCallback = useCallback(
     (entries) => {
       const [entry] = entries;
       // entries.forEach((entry) => {
-      if (entry.isIntersecting && totalResults > recipes.length) {
+      if (entry.isIntersecting && totalRecipes > recipes.length) {
         onDispatch();
       }
       // });
     },
-    [onDispatch, recipes, totalResults]
+    [onDispatch, recipes, totalRecipes]
   );
 
   useEffect(() => {

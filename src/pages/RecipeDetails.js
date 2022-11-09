@@ -11,7 +11,7 @@ import {
 import { BiCopyright, BiDish, BiTimeFive } from "react-icons/bi";
 import { Col, ListGroup, Row } from "react-bootstrap/esm";
 import DisplayError from "../components/DisplayError";
-import { searchRecipesInformation } from "../api/spoonacular";
+import { searchRecipesInformation } from "../api/repository";
 import Loading from "../components/Loading";
 import { v4 as uuidv4 } from "uuid";
 import GeneralInfo from "../features/recipes/GeneralInfo";

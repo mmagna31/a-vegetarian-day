@@ -1,14 +1,10 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import { IngredientItem } from "./IngredientItem";
-import { addIngredient, cleanHints, selectHints } from "./ingredientsSlice";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import styles from "./HintsList.module.css";
 
-const HintsList = ({ extraAction }) => {
-  const dispatch = useDispatch();
-  const hints = useSelector(selectHints);
+const HintsList = ({ hints, handleClick }) => {
   return (
     <div className={styles.wrapperList}>
       {hints.length > 0 && (
@@ -22,9 +18,7 @@ const HintsList = ({ extraAction }) => {
                 key={ingredient.id}
                 {...ingredient}
                 handleClick={() => {
-                  dispatch(addIngredient(ingredient));
-                  dispatch(cleanHints());
-                  if (extraAction) extraAction();
+                  handleClick(ingredient);
                 }}
               />
             ))}

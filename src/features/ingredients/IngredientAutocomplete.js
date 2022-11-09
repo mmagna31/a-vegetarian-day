@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { fetchHints, cleanHints } from "./ingredientsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchHints,
+  cleanHints,
+  selectHints,
+  addIngredient,
+} from "./ingredientsSlice";
 import { MdOutlineClear } from "react-icons/md";
 import HintsList from "./HintsList";
-import ButtonSearch from "./ButtonSearch";
+import ButtonSearch from "../../components/ButtonSearch";
 
 const IngredientAutocomplete = ({ handleSearch }) => {
   /* Set milliseconds spent to show the ingredients list */
   const SHOW_INGREDIENT_AFTER = 1000;
 
   const dispatch = useDispatch();
+  const hints = useSelector(selectHints);
+  console.log("hints:", hints);
+
+  const handleClick = (ingredient) => {
+    dispatch(addIngredient(ingredient));
+    dispatch(cleanHints());
+    setInput("");
+  };
 
   const [input, setInput] = useState("");
 
@@ -52,7 +65,9 @@ const IngredientAutocomplete = ({ handleSearch }) => {
         )}
       </InputGroup>
 
-      {input.length > 0 && <HintsList extraAction={() => setInput("")} />}
+      {input.length > 0 && (
+        <HintsList hints={hints} handleClick={handleClick} />
+      )}
     </>
   );
 };

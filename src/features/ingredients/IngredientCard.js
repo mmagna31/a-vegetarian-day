@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import DefaultImg from "../../assets/img/card_default.jpg";
 import { MdDeleteForever } from "react-icons/md";
-import { getUrlImageIngredient } from "../../api/spoonacular";
+import { getUrlImageIngredient } from "../../api/repository";
 import styles from "./IngredientCard.module.css";
 
 const IngredientCard = React.forwardRef(({ name, image, onClick }, ref) => {

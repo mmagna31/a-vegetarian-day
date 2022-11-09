@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import IngredientCard from "./IngredientCard";
-import { selectIngredients, removeIngredient } from "./ingredientsSlice";
+import { removeIngredient } from "./ingredientsSlice";
 import styles from "./IngredientsList.module.css";
 import {
   MdOutlineArrowBackIos,
@@ -10,9 +10,8 @@ import {
 } from "react-icons/md";
 import { animateScroll as scroll } from "react-scroll";
 
-const IngredientsList = () => {
+const IngredientsList = ({ ingredients }) => {
   const dispatch = useDispatch();
-  const ingredients = useSelector(selectIngredients);
 
   const handleClick = (ingredient) => {
     dispatch(removeIngredient(ingredient));
@@ -108,13 +107,13 @@ const IngredientsList = () => {
     }
   }, [lastIngrRef, ingredients]);
 
-  if (ingredients.length === 0) {
-    return (
-      <Container className="text-center" style={{ height: "130px" }}>
-        No ingredients selected
-      </Container>
-    );
-  }
+  // if (ingredients.length === 0) {
+  //   return (
+  //     <Container className="text-center" style={{ height: "130px" }}>
+  //       No ingredients selected
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container

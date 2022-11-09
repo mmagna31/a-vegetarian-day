@@ -84,23 +84,22 @@ const YourFridge = () => {
           <p className="lead text-center pb-5">
             Add ingredients to find out what you can cook with them.
           </p>
-          <div className="pb-5">
-            <IngredientAutocomplete handleSearch={handleSearch} />
-          </div>
+          <IngredientsList ingredients={ingredients} />
+          <IngredientAutocomplete handleSearch={handleSearch} />
+          <p className="text-muted text-center pb-5">
+            Non-vegan ingredients will not be included in the search.
+          </p>
         </Container>
       </Hero>
-      <Section>
-        <TitleSection>Ingredients</TitleSection>
-        <p className="text-muted text-center">
-          Non-vegan ingredients will not be included in the search.
-        </p>
-        <IngredientsList />
-      </Section>
       <Section>
         <TitleSection>
           Recipes {totalRecipes > 0 && `Found ${totalRecipes}`}
         </TitleSection>
-        <RecipesList onDispatch={handleDispatch} />
+        <RecipesList
+          recipes={recipes}
+          onDispatch={handleDispatch}
+          totalRecipes={totalRecipes}
+        />
         {recipesStatus === "loading" ? (
           <div className="text-center m-2">
             <Loading />
