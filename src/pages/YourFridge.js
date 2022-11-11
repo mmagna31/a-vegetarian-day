@@ -52,7 +52,7 @@ const YourFridge = () => {
   }, [errorIngredients, errorRecipes]);
 
   useEffect(() => {
-    // firstLoad(); ---- to reenable
+    firstLoad();
   }, [firstLoad]);
 
   const handleReset = () => {
@@ -85,7 +85,7 @@ const YourFridge = () => {
             Add ingredients to find out what you can cook with them.
           </p>
           <IngredientsList ingredients={ingredients} />
-          {/* <IngredientAutocomplete handleSearch={handleSearch} /> */}
+          <IngredientAutocomplete handleSearch={handleSearch} />
           <p className="text-muted text-center pb-5">
             Non-vegan ingredients will not be included in the search.
           </p>

@@ -11,21 +11,11 @@ import {
   canScrollToRight,
 } from "../../utils/elementScrollable";
 
-const ingredients = [
-  { id: 1, name: "apple", image: "apple.jpg" },
-  { id: 2, name: "apple", image: "apple.jpg" },
-  { id: 3, name: "apple", image: "apple.jpg" },
-  { id: 4, name: "apple", image: "apple.jpg" },
-  { id: 5, name: "apple", image: "apple.jpg" },
-  { id: 6, name: "apple", image: "apple.jpg" },
-  { id: 7, name: "apple", image: "apple.jpg" },
-];
-
-const IngredientsList = () => {
+const IngredientsList = ({ ingredients }) => {
   const scrollContainerRef = useRef(null);
 
-  const [isLeftActive, setIsLeftActive] = useState(true);
-  const [isRightActive, setIsRightActive] = useState(true);
+  const [isLeftActive, setIsLeftActive] = useState(false);
+  const [isRightActive, setIsRightActive] = useState(false);
 
   const handleScroll = (value) => {
     scroll.scrollMore(value, {
@@ -35,24 +25,26 @@ const IngredientsList = () => {
     });
   };
 
-  useEffect(() => {
-    Events.scrollEvent.register("end", () => {
-      console.log("check", canScrollToRight(scrollContainerRef.current));
-      setIsRightActive(canScrollToRight(scrollContainerRef.current));
-    });
+  const checkControls = () => {
+    setIsLeftActive(canScrollToLeft(scrollContainerRef.current));
+    setIsRightActive(canScrollToRight(scrollContainerRef.current));
+  };
 
-    // Events.scrollEvent.register("end",()=> {})
-    // });
+  useEffect(() => {
+    /* Assign event to manage controls visibility on the first render */
+    Events.scrollEvent.register("end", checkControls);
 
     scrollSpy.update();
 
     return () => {
-      Events.scrollEvent.remove("begin");
       Events.scrollEvent.remove("end");
     };
   }, []);
 
-  // const IngredientsList = ({ ingredients }) => {
+  useEffect(() => {
+    checkControls();
+  }, [ingredients]);
+
   return (
     <div className={styles.scrollWrapper}>
       <div
