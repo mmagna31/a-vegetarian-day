@@ -52,7 +52,7 @@ const YourFridge = () => {
   }, [errorIngredients, errorRecipes]);
 
   useEffect(() => {
-    firstLoad();
+    // firstLoad(); ---- to reenable
   }, [firstLoad]);
 
   const handleReset = () => {

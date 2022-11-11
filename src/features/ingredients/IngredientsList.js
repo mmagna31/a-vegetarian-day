@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
-import { animateScroll as scroll } from "react-scroll";
+import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import IngredientCard from "./IngredientCard";
 import styles from "./IngredientsList.module.css";
+import {
+  canScrollToLeft,
+  canScrollToRight,
+} from "../../utils/elementScrollable";
 
 const ingredients = [
   { id: 1, name: "apple", image: "apple.jpg" },
@@ -18,6 +22,11 @@ const ingredients = [
 ];
 
 const IngredientsList = () => {
+  const scrollContainerRef = useRef(null);
+
+  const [isLeftActive, setIsLeftActive] = useState(true);
+  const [isRightActive, setIsRightActive] = useState(true);
+
   const handleScroll = (value) => {
     scroll.scrollMore(value, {
       horizontal: true,
@@ -26,10 +35,31 @@ const IngredientsList = () => {
     });
   };
 
+  useEffect(() => {
+    Events.scrollEvent.register("end", () => {
+      console.log("check", canScrollToRight(scrollContainerRef.current));
+      setIsRightActive(canScrollToRight(scrollContainerRef.current));
+    });
+
+    // Events.scrollEvent.register("end",()=> {})
+    // });
+
+    scrollSpy.update();
+
+    return () => {
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
+  }, []);
+
   // const IngredientsList = ({ ingredients }) => {
   return (
     <div className={styles.scrollWrapper}>
-      <div id="ingredients" className={styles.scrollContainer}>
+      <div
+        ref={scrollContainerRef}
+        id="ingredients"
+        className={styles.scrollContainer}
+      >
         <ul>
           {ingredients.map((ingredient) => {
             const { id } = ingredient;
@@ -42,14 +72,26 @@ const IngredientsList = () => {
         </ul>
       </div>
       <div className={styles.controls}>
-        <button onClick={() => handleScroll(-200)}>
-          <MdOutlineArrowBackIos size={30} />
-        </button>
-        <span className={`${styles.rightControl}`}>
-          <button onClick={() => handleScroll(200)}>
-            <MdOutlineArrowForwardIos size={30} />
+        {isLeftActive && (
+          <button
+            onClick={() => {
+              handleScroll(-200);
+            }}
+          >
+            <MdOutlineArrowBackIos size={30} />
           </button>
-        </span>
+        )}
+        {isRightActive && (
+          <span className={`${styles.rightControl}`}>
+            <button
+              onClick={() => {
+                handleScroll(200);
+              }}
+            >
+              <MdOutlineArrowForwardIos size={30} />
+            </button>
+          </span>
+        )}
       </div>
     </div>
   );
