@@ -1,9 +1,9 @@
 .scrollWrapper {
   position: relative;
   height: 120px;
+  display: flex;
   overflow-y: hidden;
   overflow-x: hidden;
-  display: flex;
 }
 
 .scrollWrapper button {
@@ -37,5 +37,10 @@
   height: 100%;
   position: absolute;
   display: flex;
-  justify-content: space-between;
+}
+
+.rightControl {
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
@@ -42,14 +41,15 @@ const IngredientsList = () => {
           })}
         </ul>
       </div>
-
       <div className={styles.controls}>
         <button onClick={() => handleScroll(-200)}>
           <MdOutlineArrowBackIos size={30} />
         </button>
-        <button onClick={() => handleScroll(200)}>
-          <MdOutlineArrowForwardIos size={30} />
-        </button>
+        <span className={`${styles.rightControl}`}>
+          <button onClick={() => handleScroll(200)}>
+            <MdOutlineArrowForwardIos size={30} />
+          </button>
+        </span>
       </div>
     </div>
   );
