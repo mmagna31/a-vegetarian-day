@@ -40,7 +40,7 @@ export const ingredientsSlice = createSlice({
     },
     removeIngredient: (state, action) => {
       state.selected = state.selected.filter(
-        (ingredient) => ingredient.id !== action.payload.id
+        (ingredient) => ingredient.id !== action.payload
       );
     },
     cleanSelected: (state) => {
