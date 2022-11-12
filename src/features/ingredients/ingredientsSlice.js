@@ -17,7 +17,6 @@ export const fetchHints = createAsyncThunk(
   async (value, { getState }) => {
     const { hintsNumber } = getState().ingredients;
     const response = await searchIngredients(value, hintsNumber);
-    console.log("response", response);
     return response.results;
   }
 );

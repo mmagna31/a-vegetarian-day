@@ -6,7 +6,6 @@ import {
   cleanHints,
   selectHints,
   addIngredient,
-  selectIngredients,
 } from "./ingredientsSlice";
 import { MdOutlineClear } from "react-icons/md";
 import HintsList from "./HintsList";
@@ -18,7 +17,7 @@ const IngredientAutocomplete = ({ handleSearch }) => {
 
   const dispatch = useDispatch();
   const hints = useSelector(selectHints);
-  const ingredients = useSelector(selectIngredients);
+  console.log("hints:", hints);
 
   const handleClick = (ingredient) => {
     dispatch(addIngredient(ingredient));
@@ -27,11 +26,11 @@ const IngredientAutocomplete = ({ handleSearch }) => {
   };
 
   const [input, setInput] = useState("");
-  const initialPlaceholder = "Type to search ingredient...";
-  const [placeholder, setPlaceholder] = useState(initialPlaceholder);
-  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
+    // TODO: inserire un controllo per verificare quando far partire questa funzione
+    dispatch(cleanHints());
+
     const timerId = setTimeout(() => {
       if (input !== " " && input.length >= 1) {
         const value = input.trim();
@@ -43,24 +42,13 @@ const IngredientAutocomplete = ({ handleSearch }) => {
     };
   }, [input, dispatch]);
 
-  useEffect(() => {
-    /* used to manage placeholder input and search button */
-    if (ingredients.length > 0) {
-      setPlaceholder("Type to search ingredients or start search...");
-      setIsDisabled(false);
-    } else {
-      setPlaceholder(initialPlaceholder);
-      setIsDisabled(true);
-    }
-  }, [ingredients]);
-
   return (
     <>
       <InputGroup className="mb-1">
         <Form.Control
           type="text"
           value={input}
-          placeholder={placeholder}
+          placeholder="Search ingredient..."
           onChange={(e) => setInput(e.target.value)}
         />
         {input.length > 0 ? (
@@ -73,7 +61,7 @@ const IngredientAutocomplete = ({ handleSearch }) => {
             <MdOutlineClear />
           </Button>
         ) : (
-          <ButtonSearch handleSearch={handleSearch} isDisabled={isDisabled} />
+          <ButtonSearch handleSearch={handleSearch} />
         )}
       </InputGroup>
 
