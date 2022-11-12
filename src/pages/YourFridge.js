@@ -53,7 +53,7 @@ const YourFridge = () => {
 
   useEffect(() => {
     firstLoad();
-  }, [firstLoad]);
+  }, []);
 
   const handleReset = () => {
     setErrorPage(null);
@@ -61,13 +61,14 @@ const YourFridge = () => {
 
   const handleSearch = useCallback(() => {
     const ingredientsName = ingredients.map((ingredient) => ingredient.name);
-    if (
-      JSON.stringify(ingredientsName) !== JSON.stringify(ingredientsToSearch)
-    ) {
-      dispatch(cleanRecipes());
-    }
+    // if (
+    //   JSON.stringify(ingredientsName) !== JSON.stringify(ingredientsToSearch)
+    // ) {
+    //   dispatch(cleanRecipes());
+    // }
+    dispatch(cleanRecipes());
     dispatch(fetchByIngredientsFirst(ingredientsName));
-  }, [dispatch, ingredients, ingredientsToSearch]);
+  }, [dispatch, ingredients]);
 
   const handleDispatch = useCallback(() => {
     dispatch(fetchByIngredientsNext());
@@ -91,7 +92,7 @@ const YourFridge = () => {
           </p>
         </Container>
       </Hero>
-      {/* <Section>
+      <Section>
         <TitleSection>
           Recipes {totalRecipes > 0 && `Found ${totalRecipes}`}
         </TitleSection>
@@ -107,7 +108,7 @@ const YourFridge = () => {
         ) : (
           ""
         )}
-      </Section> */}
+      </Section>
     </>
   );
 };
