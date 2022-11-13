@@ -18,7 +18,7 @@ import {
   selectTotalResults,
   fetchByIngredientsFirst,
   fetchByIngredientsNext,
-  selectNextIngredients,
+  // selectNextIngredients,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
 import RecipesList from "../features/recipes/RecipesList";
@@ -28,20 +28,30 @@ import Section from "../components/Section";
 
 const YourFridge = () => {
   const dispatch = useDispatch();
+
   const ingredients = useSelector(selectIngredients);
   const errorIngredients = useSelector(selectErrorIngredients);
   const errorRecipes = useSelector(selectErrorRecipes);
   const recipesStatus = useSelector(selectStatusRecipes);
   const recipes = useSelector(selectRecipes);
   const totalRecipes = useSelector(selectTotalResults);
-  const [errorPage, setErrorPage] = useState(null);
-  const ingredientsToSearch = useSelector(selectNextIngredients);
+  // const ingredientsToSearch = useSelector(selectNextIngredients);
 
-  const firstLoad = useCallback(() => {
+  const [errorPage, setErrorPage] = useState(null);
+
+  // const firstLoad = useCallback(() => {
+  //   if (ingredients.length === 0 && recipes.length === 0) {
+  //     dispatch(fetchRandom());
+  //   }
+  // }, [dispatch, ingredients, recipes]);
+
+  useEffect(() => {
+    /* retrieves random recipes at the first render of the page */
+    // firstLoad();
     if (ingredients.length === 0 && recipes.length === 0) {
       dispatch(fetchRandom());
     }
-  }, [dispatch, ingredients, recipes]);
+  }, []);
 
   useEffect(() => {
     if (errorIngredients.display) {
@@ -50,10 +60,6 @@ const YourFridge = () => {
       setErrorPage(errorRecipes);
     }
   }, [errorIngredients, errorRecipes]);
-
-  useEffect(() => {
-    firstLoad();
-  }, []);
 
   const handleReset = () => {
     setErrorPage(null);
@@ -93,9 +99,14 @@ const YourFridge = () => {
         </Container>
       </Hero>
       <Section>
-        <TitleSection>
-          Recipes {totalRecipes > 0 && `Found ${totalRecipes}`}
-        </TitleSection>
+        <TitleSection>Recipes</TitleSection>
+        <p className="text-muted text-center">
+          {totalRecipes > 0
+            ? `We have ${totalRecipes} recipes`
+            : recipes.length === 0
+            ? "No recipes found for selected ingredients"
+            : "Suggested"}
+        </p>
         <RecipesList
           recipes={recipes}
           onDispatch={handleDispatch}
