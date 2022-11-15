@@ -1,10 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Logo from "../assets/img/logo_200x200.png";
+import styled from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className={styled.footer}>
       <Container className="text-center bg-black p-3" fluid>
         <img
           src={Logo}

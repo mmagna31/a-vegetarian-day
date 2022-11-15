@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://api.spoonacular.com",
+  // baseURL: "https://api.spoonacular.com",
   // baseURL: "https://0fb7a6bf-c01e-4fc8-a0cb-3bdf62856769.mock.pstmn.io",
-  // baseURL: "https://45004aed-53cd-4e0c-bedf-1070ec467150.mock.pstmn.io",
+  baseURL: "https://45004aed-53cd-4e0c-bedf-1070ec467150.mock.pstmn.io",
   params: {
     apiKey: process.env.REACT_APP_SPOONACOLAR_API_KEY,
   },
