@@ -6,9 +6,15 @@ import DOMPurify from "dompurify";
  * dopo averla sanificata.
  */
 
-const Sanitized = ({ htmlString = "" }) => {
+const Sanitized = ({ htmlString = "", className = null, style = {} }) => {
   const data = DOMPurify.sanitize(htmlString);
-  return <p dangerouslySetInnerHTML={{ __html: data }} />;
+  return (
+    <p
+      className={className}
+      style={style}
+      dangerouslySetInnerHTML={{ __html: data }}
+    />
+  );
 };
 
 export default Sanitized;

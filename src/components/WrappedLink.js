@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 
 const WrappedLink = styled(Link)`
   text-decoration: none;
-  padding: 0.5rem;
   color: inherit;
+  &:hover {
+    opacity: 0.6;
+    color: inherit;
+  }
 `;
 
 export default WrappedLink;

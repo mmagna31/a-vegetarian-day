@@ -119,7 +119,9 @@ const YourFridge = () => {
         ) : (
           ""
         )}
-        {recipes.length === 0 ? "no recipes-----------imposta immagine" : ""}
+        {recipes.length === 0
+          ? "no recipes-----------imposta immagine problema con primo rendering"
+          : ""}
       </Section>
     </>
   );
