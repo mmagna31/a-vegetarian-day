@@ -4,7 +4,6 @@ import { BiTimeFive } from "react-icons/bi";
 import { GiThreeLeaves, GiGrain } from "react-icons/gi";
 import Sanitized from "../../components/Sanitized";
 import { truncate } from "../../utils/truncate";
-import styles from "./RecipeSnippet.module.css";
 
 const RecipeSnippet = React.forwardRef(
   (
@@ -24,7 +23,7 @@ const RecipeSnippet = React.forwardRef(
       <Card ref={ref} className="shadow w-100 h-100">
         <Card.Img variant="top" src={image} className="shadow" />
         <Card.Body>
-          <Card.Title className="font-custom text-truncate text-center fs-3">
+          <Card.Title className="font-custom text-truncate text-center fs-3 text-primary">
             {title}
           </Card.Title>
 
@@ -37,7 +36,7 @@ const RecipeSnippet = React.forwardRef(
                     : "Good for any occasion"}
                 </p>
                 <Sanitized
-                  className={styles.justifyText}
+                  className="justifyText"
                   htmlString={summary ? truncate(summary, 200) : ""}
                 />
               </Col>

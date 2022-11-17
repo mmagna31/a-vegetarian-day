@@ -18,7 +18,7 @@ const GeneralInfo = ({
   occasions,
 }) => {
   return (
-    <Container className="border">
+    <Container>
       <Row>
         <Col>
           <GiKnifeFork />

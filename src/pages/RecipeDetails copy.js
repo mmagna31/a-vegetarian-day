@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Sanitized from "../components/Sanitized";
 import {
@@ -17,7 +17,6 @@ import { v4 as uuidv4 } from "uuid";
 import GeneralInfo from "../features/recipes/GeneralInfo";
 import IngredientsList from "../features/recipes/IngredientsList";
 import InstructionsSteps from "./InstructionsSteps";
-import RecipeShortInfo from "./RecipeShortInfo";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -39,13 +38,7 @@ const RecipeDetails = () => {
         setLoading(false);
       }
     };
-    // fetchData();
-
-    setData({
-      title: "test",
-      summary: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      image: "https://spoonacular.com/recipeImages/64694-556x370.jpg",
-    });
+    fetchData();
   }, [id]);
 
   const handleClose = () => {
@@ -90,9 +83,9 @@ const RecipeDetails = () => {
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
         <Sanitized className="justifyText" htmlString={summary} />
 
-        <RecipeShortInfo {...data} />
-
-        {/* {extendedIngredients?.length > 0 && (
+        <img src={image} alt={title} />
+        <GeneralInfo {...data} />
+        {extendedIngredients?.length > 0 && (
           <IngredientsList extendedIngredients={extendedIngredients} />
         )}
         {analyzedInstructions?.length > 0 && (
@@ -101,7 +94,7 @@ const RecipeDetails = () => {
 
         <p className="text-center">
           <BiCopyright /> {creditsText}
-        </p> */}
+        </p>
       </Container>
     </>
   );

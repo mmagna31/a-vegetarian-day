@@ -27,3 +27,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Chalkboard",
     "Roboto Condensed", sans-serif;
 }
+
+.justifyText {
+  text-align: justify;
+  text-justify: inter-word;
+}
