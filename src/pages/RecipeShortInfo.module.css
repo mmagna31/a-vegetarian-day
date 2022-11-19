@@ -1,0 +1,14 @@
+.imgInfo {
+  width: 100%;
+  /* border-radius: 0.375rem ; */
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .imgInfo {
+    border-radius: 0px;
+    border-top-right-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+  }
+}
