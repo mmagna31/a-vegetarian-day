@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Sanitized from "../components/Sanitized";
-import {
-  GiKnifeFork,
-  GiGrain,
-  GiMilkCarton,
-  GiThreeLeaves,
-} from "react-icons/gi";
+import { GiKnifeFork, GiGrain, GiThreeLeaves } from "react-icons/gi";
 import { BiCopyright, BiDish, BiTimeFive } from "react-icons/bi";
-import { Col, ListGroup, Row } from "react-bootstrap/esm";
+import { Col, Row } from "react-bootstrap/esm";
 import DisplayError from "../components/DisplayError";
 import { searchRecipesInformation } from "../api/repository";
 import Loading from "../components/Loading";
-import { v4 as uuidv4 } from "uuid";
-import GeneralInfo from "../features/recipes/GeneralInfo";
 import IngredientsList from "../features/recipes/IngredientsList";
-import InstructionsSteps from "./InstructionsSteps";
-import RecipeShortInfo from "./RecipeShortInfo";
+import InstructionsSteps from "../features/recipes/InstructionsSteps";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -39,13 +31,7 @@ const RecipeDetails = () => {
         setLoading(false);
       }
     };
-    // fetchData();
-
-    setData({
-      title: "test",
-      summary: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      image: "https://spoonacular.com/recipeImages/64694-556x370.jpg",
-    });
+    fetchData();
   }, [id]);
 
   const handleClose = () => {
@@ -65,11 +51,21 @@ const RecipeDetails = () => {
     occasions,
     vegan,
     glutenFree,
-    dairyFree,
     creditsText,
     extendedIngredients,
     analyzedInstructions,
   } = data;
+
+  const shortInfo = [
+    { icon: <GiKnifeFork />, text: servings },
+    { icon: <BiTimeFive />, text: `${readyInMinutes} Min` },
+    { icon: <BiDish />, text: dishTypes?.join(", ") },
+    {
+      icon: <GiThreeLeaves />,
+      text: vegan ? "Vegan" : null,
+    },
+    { icon: <GiGrain />, text: glutenFree ? "Gluten Free" : null },
+  ];
 
   if (loading) {
     return (
@@ -88,20 +84,51 @@ const RecipeDetails = () => {
       {error.display && <DisplayError {...error} handleClose={handleClose} />}
       <Container>
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
+        <p className="text-center text-muted">
+          Ideal for{" "}
+          {occasions ? (
+            <span className="text-capitalize">{occasions.join(", ")}</span>
+          ) : (
+            "any occasions"
+          )}
+        </p>
         <Sanitized className="justifyText" htmlString={summary} />
+        <Row>
+          <Col xs={12} md={{ span: 6, order: 1 }}>
+            <img className="rounded w-100" src={image} alt={title} />
+          </Col>
+          <Col xs={12} md={{ span: 6, order: 0 }}>
+            <div className="border rounded my-2 my-md-0 py-3 d-flex justify-content-around flex-md-column h-100 align-items-center">
+              {shortInfo.map((info) => {
+                return (
+                  info.text && (
+                    <span className="text-capitalize font-custom fs-3">
+                      {info.icon} {info.text}
+                    </span>
+                  )
+                );
+              })}
+            </div>
+          </Col>
+        </Row>
 
-        <RecipeShortInfo {...data} />
+        <Row className="mt-2">
+          <Col xs={12} md={6}>
+            {extendedIngredients?.length > 0 && (
+              <IngredientsList extendedIngredients={extendedIngredients} />
+            )}
+          </Col>
 
-        {/* {extendedIngredients?.length > 0 && (
-          <IngredientsList extendedIngredients={extendedIngredients} />
-        )}
-        {analyzedInstructions?.length > 0 && (
-          <InstructionsSteps analyzedInstructions={analyzedInstructions} />
-        )}
+          <Col xs={12} md={6}>
+            {analyzedInstructions?.length > 0 && (
+              <InstructionsSteps analyzedInstructions={analyzedInstructions} />
+            )}
+          </Col>
+        </Row>
 
         <p className="text-center">
           <BiCopyright /> {creditsText}
-        </p> */}
+        </p>
       </Container>
     </>
   );
