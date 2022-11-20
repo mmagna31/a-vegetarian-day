@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   searchRandomRecipes,
+  searchRecipesByQuery,
   searchRecipesByIngredients,
 } from "../../api/repository";
 
@@ -15,6 +16,14 @@ const initialState = {
   number: 1,
   totalResults: 0,
   nextIngredients: [],
+  nextQuery: null,
+};
+
+const isFetchFullfilled = (action) => {
+  return (
+    action.type.endsWith("fetchByIngredients/fulfilled") ||
+    action.type.endsWith("fetchByQuery/fulfilled")
+  );
 };
 
 export const fetchByIngredients = createAsyncThunk(
@@ -30,6 +39,15 @@ export const fetchByIngredients = createAsyncThunk(
   }
 );
 
+export const fetchByQuery = createAsyncThunk(
+  "recipes/fetchByQuery",
+  async (query, { getState }) => {
+    const { nextOffset, number } = getState().recipes;
+    const response = await searchRecipesByQuery(number, nextOffset, query);
+    return response;
+  }
+);
+
 export const fetchByIngredientsNext = () => (dispatch, getState) => {
   const { nextIngredients } = getState().recipes;
   dispatch(fetchByIngredients(nextIngredients));
@@ -37,6 +55,15 @@ export const fetchByIngredientsNext = () => (dispatch, getState) => {
 export const fetchByIngredientsFirst = (ingredients) => (dispatch) => {
   dispatch(setNextIngredients(ingredients));
   dispatch(fetchByIngredients(ingredients));
+};
+
+export const fetchByQueryNext = () => (dispatch, getState) => {
+  const { nextQuery } = getState().recipes;
+  dispatch(fetchByQuery(nextQuery));
+};
+export const fetchByQueryFirst = (query) => (dispatch) => {
+  dispatch(setNextQuery(query));
+  dispatch(fetchByQuery(query));
 };
 
 export const fetchRandom = createAsyncThunk(
@@ -58,17 +85,30 @@ export const recipesSlice = createSlice({
     setNextIngredients: (state, action) => {
       state.nextIngredients = action.payload;
     },
+    setNextQuery: (state, action) => {
+      state.nextSearch = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchByIngredients.pending, (state) => {
-        state.status = "loading";
+      .addCase(fetchRandom.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.recipes = action.payload;
       })
-      .addCase(fetchByIngredients.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = { display: true, info: { ...action.error } };
-      })
-      .addCase(fetchByIngredients.fulfilled, (state, action) => {
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state, action) => {
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.status = "failed";
+          state.error = { display: true, info: { ...action.error } };
+        }
+      )
+      .addMatcher(isFetchFullfilled, (state, action) => {
         state.status = "idle";
         if (state.nextOffset === 0) {
           state.recipes = action.payload.results;
@@ -78,22 +118,12 @@ export const recipesSlice = createSlice({
         state.nextOffset = action.payload.number + action.payload.offset;
         state.totalResults = action.payload.totalResults;
         state.number = action.payload.number;
-      })
-      .addCase(fetchRandom.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchRandom.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = { display: true, info: { ...action.error } };
-      })
-      .addCase(fetchRandom.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.recipes = action.payload;
       });
   },
 });
 
-export const { cleanRecipes, setNextIngredients } = recipesSlice.actions;
+export const { cleanRecipes, setNextIngredients, setNextQuery } =
+  recipesSlice.actions;
 
 export const selectRecipes = (state) => state.recipes.recipes;
 export const selectError = (state) => state.recipes.error;
@@ -102,5 +132,6 @@ export const selectTotalResults = (state) => state.recipes.totalResults;
 export const selectNextOffset = (state) => state.recipes.nextOffset;
 export const selectNumber = (state) => state.recipes.number;
 export const selectNextIngredients = (state) => state.recipes.nextIngredients;
+export const selectNextQuery = (state) => state.recipes.nextQuery;
 
 export default recipesSlice.reducer;

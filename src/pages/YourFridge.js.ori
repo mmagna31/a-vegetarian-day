@@ -20,7 +20,10 @@ import {
   fetchByIngredientsNext,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
-import RecipesSection from "../features/recipes/RecipesSection";
+import RecipesList from "../features/recipes/RecipesList";
+import Loading from "../components/Loading";
+import TitleSection from "../components/TitleSection";
+import Section from "../components/Section";
 
 const YourFridge = () => {
   const dispatch = useDispatch();
@@ -49,6 +52,10 @@ const YourFridge = () => {
     }
   }, [errorIngredients, errorRecipes]);
 
+  const handleReset = () => {
+    setErrorPage(null);
+  };
+
   const handleSearch = useCallback(() => {
     const ingredientsName = ingredients.map((ingredient) => ingredient.name);
     dispatch(cleanRecipes());
@@ -61,9 +68,7 @@ const YourFridge = () => {
 
   return (
     <>
-      {errorPage && (
-        <DisplayError {...errorPage} handleClose={() => setErrorPage(null)} />
-      )}
+      {errorPage && <DisplayError {...errorPage} handleClose={handleReset} />}
       <Hero img={intro} mask={false}>
         <Container>
           <h1 className="font-custom display-1 text-center pt-5">
@@ -79,12 +84,31 @@ const YourFridge = () => {
           </p>
         </Container>
       </Hero>
-      <RecipesSection
-        totalRecipes={totalRecipes}
-        recipes={recipes}
-        recipesStatus={recipesStatus}
-        handleDispatch={handleDispatch}
-      />
+      <Section>
+        <TitleSection>Recipes</TitleSection>
+        <p className="text-muted text-center">
+          {totalRecipes > 0
+            ? `We have ${totalRecipes} recipes`
+            : recipes.length === 0
+            ? "No recipes found for selected ingredients"
+            : "Suggested"}
+        </p>
+        <RecipesList
+          recipes={recipes}
+          onDispatch={handleDispatch}
+          totalRecipes={totalRecipes}
+        />
+        {recipesStatus === "loading" ? (
+          <div className="text-center m-2">
+            <Loading />
+          </div>
+        ) : (
+          ""
+        )}
+        {recipes.length === 0
+          ? "no recipes-----------imposta immagine problema con primo rendering"
+          : ""}
+      </Section>
     </>
   );
 };

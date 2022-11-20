@@ -20,16 +20,16 @@ const IngredientAutocomplete = ({ handleSearch }) => {
   const hints = useSelector(selectHints);
   const ingredients = useSelector(selectIngredients);
 
+  const [input, setInput] = useState("");
+  const initialPlaceholder = "Type to search ingredient...";
+  const [placeholder, setPlaceholder] = useState(initialPlaceholder);
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const handleClick = (ingredient) => {
     dispatch(addIngredient(ingredient));
     dispatch(cleanHints());
     setInput("");
   };
-
-  const [input, setInput] = useState("");
-  const initialPlaceholder = "Type to search ingredient...";
-  const [placeholder, setPlaceholder] = useState(initialPlaceholder);
-  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     const timerId = setTimeout(() => {

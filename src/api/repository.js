@@ -77,3 +77,19 @@ export const searchRecipesInformation = async (recipeId) => {
 
   return response.data;
 };
+
+export const searchRecipesByQuery = async (number, offset, query) => {
+  const response = await instance.get("recipes/complexSearch", {
+    params: {
+      query,
+      diet: "vegetarian",
+      addRecipeInformation: true,
+      instructionsRequired: true,
+      fillIngredients: true,
+      number,
+      offset,
+    },
+  });
+
+  return response.data;
+};
