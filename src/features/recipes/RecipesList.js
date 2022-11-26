@@ -9,11 +9,9 @@ const RecipesList = ({ recipes, totalRecipes, onDispatch }) => {
   const intersectionCallback = useCallback(
     (entries) => {
       const [entry] = entries;
-      // entries.forEach((entry) => {
       if (entry.isIntersecting && totalRecipes > recipes.length) {
         onDispatch();
       }
-      // });
     },
     [onDispatch, recipes, totalRecipes]
   );

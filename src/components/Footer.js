@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Logo from "../assets/img/logo_200x200.png";
-import styled from "./Footer.module.css";
+import styled from "styled-components";
 
 const Footer = () => {
   return (
-    <footer className={styled.footer}>
+    <FooterWrapper>
       <Container className="text-center bg-black p-3" fluid>
         <img
           src={Logo}
@@ -16,8 +16,12 @@ const Footer = () => {
         />{" "}
         <span className="d-block font-custom">A vegetarian Day</span>
       </Container>
-    </footer>
+    </FooterWrapper>
   );
 };
 
 export default Footer;
+
+const FooterWrapper = styled.footer`
+  margin-top: auto;
+`;

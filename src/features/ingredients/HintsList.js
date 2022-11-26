@@ -1,14 +1,14 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { IngredientItem } from "./IngredientItem";
+import IngredientItem from "./IngredientItem";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import styles from "./HintsList.module.css";
+import styled from "styled-components";
 
 const HintsList = ({ hints, handleClick }) => {
   return (
-    <div className={styles.wrapperList}>
+    <WrapperList>
       {hints.length > 0 && (
-        <ListGroup className={styles.list}>
+        <List>
           <Scrollbars
             style={{ width: "100%", height: 200 }}
             className="rounded border"
@@ -23,10 +23,20 @@ const HintsList = ({ hints, handleClick }) => {
               />
             ))}
           </Scrollbars>
-        </ListGroup>
+        </List>
       )}
-    </div>
+    </WrapperList>
   );
 };
 
 export default HintsList;
+
+const WrapperList = styled.div`
+  position: relative;
+`;
+
+const List = styled(ListGroup)`
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+`;

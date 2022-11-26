@@ -21,6 +21,8 @@ const Hero = ({
   );
 };
 
+export default Hero;
+
 const Wrapper = styled.div`
   position: relative;
 `;
@@ -48,5 +50,3 @@ const Mask = styled.div`
 const WrapperChildren = styled.div`
   position: relative;
 `;
-
-export default Hero;

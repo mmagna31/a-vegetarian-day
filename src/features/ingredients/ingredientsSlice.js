@@ -25,7 +25,6 @@ export const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
   reducers: {
-    reset: (state) => initialState,
     addIngredient: (state, action) => {
       /* add unique ingredients */
       const existingIngr = state.selected.filter(
@@ -48,6 +47,7 @@ export const ingredientsSlice = createSlice({
     cleanHints: (state) => {
       state.hints = [];
     },
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -69,15 +69,16 @@ export const ingredientsSlice = createSlice({
 });
 
 export const {
-  reset,
   cleanHints,
   cleanSelected,
   addIngredient,
   removeIngredient,
+  reset,
 } = ingredientsSlice.actions;
 
 export const selectHints = (state) => state.ingredients.hints;
 export const selectIngredients = (state) => state.ingredients.selected;
 export const selectError = (state) => state.ingredients.error;
+export const selectStatus = (state) => state.ingredients.status;
 
 export default ingredientsSlice.reducer;

@@ -10,10 +10,10 @@ const About = () => {
         <Container fluid>
           <Row>
             <Col className="text-center p-5">
-              <h3 className="text-uppercase custom-font">
+              <h3 className="text-uppercase font-custom">
                 If you don't want meat today, it's the best time for
               </h3>
-              <h1 className="display-4 fw-bold text-uppercase custom-font">
+              <h1 className="display-4 fw-bold text-uppercase">
                 A vegetarian day
               </h1>
             </Col>

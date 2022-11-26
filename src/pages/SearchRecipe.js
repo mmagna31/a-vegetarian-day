@@ -14,10 +14,12 @@ import {
   fetchByQueryFirst,
   cleanRecipes,
   fetchByQueryNext,
+  reset,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
 import ButtonSearch from "../components/ButtonSearch";
 import { MdOutlineClear } from "react-icons/md";
+import useDisplayError from "../hooks/useDisplayError";
 
 const SearchRecipe = () => {
   const dispatch = useDispatch();
@@ -29,19 +31,14 @@ const SearchRecipe = () => {
 
   const [input, setInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
-  const [errorPage, setErrorPage] = useState(null);
+
+  const error = useDisplayError(errorRecipes);
 
   useEffect(() => {
     if (!nextQuery) {
       dispatch(fetchRandom());
     }
   }, []);
-
-  useEffect(() => {
-    if (errorRecipes.display) {
-      setErrorPage(errorRecipes);
-    }
-  }, [errorRecipes]);
 
   useEffect(() => {
     /* used to manage placeholder input and search button */
@@ -63,8 +60,8 @@ const SearchRecipe = () => {
 
   return (
     <>
-      {errorPage && (
-        <DisplayError {...errorPage} handleClose={() => setErrorPage(null)} />
+      {error && (
+        <DisplayError {...error} handleClose={() => dispatch(reset())} />
       )}
       <Hero img={imgRecipes} mask={false}>
         <Container>

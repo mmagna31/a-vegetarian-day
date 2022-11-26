@@ -88,6 +88,7 @@ export const recipesSlice = createSlice({
     setNextQuery: (state, action) => {
       state.nextSearch = action.payload;
     },
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -122,7 +123,7 @@ export const recipesSlice = createSlice({
   },
 });
 
-export const { cleanRecipes, setNextIngredients, setNextQuery } =
+export const { cleanRecipes, setNextIngredients, setNextQuery, reset } =
   recipesSlice.actions;
 
 export const selectRecipes = (state) => state.recipes.recipes;

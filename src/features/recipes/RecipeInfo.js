@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import styles from "./RecipeInfo.module.css";
 import { GiKnifeFork, GiGrain, GiThreeLeaves } from "react-icons/gi";
 import { BiDish, BiTimeFive } from "react-icons/bi";
+import styled from "styled-components";
 
 const RecipeInfo = ({
   image,
@@ -28,7 +28,7 @@ const RecipeInfo = ({
     <Container className="border rounded">
       <Row>
         <Col xs={12} md={{ span: 6, order: 1 }} className="p-0">
-          <img className={styles.imgRecipe} src={image} alt={title} />
+          <ImgRecipe src={image} alt={title} />
         </Col>
         <Col xs={12} md={{ span: 6, order: 0 }} className="p-0">
           <div className="py-3 d-flex justify-content-around flex-md-column h-100 align-items-center">
@@ -49,3 +49,15 @@ const RecipeInfo = ({
 };
 
 export default RecipeInfo;
+
+const ImgRecipe = styled.img`
+  width: 100%;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+
+  @media screen and (min-width: 768px) {
+    border-radius: 0px;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+  }
+`;

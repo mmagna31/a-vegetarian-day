@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
 import intro from "../assets/img/intro.jpg";
@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectError as selectErrorIngredients,
   selectIngredients,
+  reset as resetIngredients,
+  selectStatus as selectStatusHints,
 } from "../features/ingredients/ingredientsSlice";
 import {
   fetchRandom,
@@ -18,9 +20,11 @@ import {
   selectTotalResults,
   fetchByIngredientsFirst,
   fetchByIngredientsNext,
+  reset as resetRecipes,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
 import RecipesSection from "../features/recipes/RecipesSection";
+import useDisplayError from "../hooks/useDisplayError";
 
 const YourFridge = () => {
   const dispatch = useDispatch();
@@ -29,10 +33,11 @@ const YourFridge = () => {
   const errorIngredients = useSelector(selectErrorIngredients);
   const errorRecipes = useSelector(selectErrorRecipes);
   const recipesStatus = useSelector(selectStatusRecipes);
+  const hintsStatus = useSelector(selectStatusHints);
   const recipes = useSelector(selectRecipes);
   const totalRecipes = useSelector(selectTotalResults);
 
-  const [errorPage, setErrorPage] = useState(null);
+  const error = useDisplayError(errorRecipes, errorIngredients);
 
   useEffect(() => {
     /* retrieves random recipes at the first render of the page */
@@ -40,14 +45,6 @@ const YourFridge = () => {
       dispatch(fetchRandom());
     }
   }, []);
-
-  useEffect(() => {
-    if (errorIngredients.display) {
-      setErrorPage(errorIngredients);
-    } else if (errorRecipes.display) {
-      setErrorPage(errorRecipes);
-    }
-  }, [errorIngredients, errorRecipes]);
 
   const handleSearch = useCallback(() => {
     const ingredientsName = ingredients.map((ingredient) => ingredient.name);
@@ -59,11 +56,14 @@ const YourFridge = () => {
     dispatch(fetchByIngredientsNext());
   }, [dispatch]);
 
+  const handleClose = () => {
+    if (recipesStatus === "failed") dispatch(resetRecipes());
+    if (hintsStatus === "failed") dispatch(resetIngredients());
+  };
+
   return (
     <>
-      {errorPage && (
-        <DisplayError {...errorPage} handleClose={() => setErrorPage(null)} />
-      )}
+      {error && <DisplayError {...error} handleClose={handleClose} />}
       <Hero img={intro} mask={false}>
         <Container>
           <h1 className="font-custom display-1 text-center pt-5">
