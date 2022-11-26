@@ -105,8 +105,8 @@ const DelButton = styled.button`
   border: none;
   background-color: transparent;
   position: absolute;
-  margin-top: auto;
-  margin-bottom: auto;
   top: 0;
   bottom: 0;
+  right: 50px;
+  z-index: 999;
 `;
