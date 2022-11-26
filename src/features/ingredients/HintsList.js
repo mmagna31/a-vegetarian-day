@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const HintsList = ({ hints, handleClick }) => {
   return (
-    <WrapperList>
+    <WrapperList className="fixedWidthMd">
       {hints.length > 0 && (
         <List>
           <Scrollbars

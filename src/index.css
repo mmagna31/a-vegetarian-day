@@ -4,6 +4,7 @@
   font-family: "Chalkboard";
   src: local("Chalkboard"),
     url("./fonts/Chalkboard/Chalkboard-Regular.ttf") format("truetype");
+
   font-weight: regular;
 }
 
@@ -31,4 +32,17 @@ body {
 .justifyText {
   text-align: justify;
   text-justify: inter-word;
+}
+
+.textHero {
+  text-shadow: 2px 2px 8px #000;
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .fixedWidthMd {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

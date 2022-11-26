@@ -22,7 +22,9 @@ const IngredientCard = ({ id, name, image }) => {
         src={(image && getUrlImageIngredient(image)) || DefaultImg}
       />
       <Card.Body className="text-center p-0">
-        <p className="font-custom text-capitalize text-truncate m-0">{name}</p>
+        <p className="font-custom text-capitalize text-truncate m-0 text-dark">
+          {name}
+        </p>
         <RemoveButton onClick={handleClick}>
           <MdDeleteForever />
         </RemoveButton>

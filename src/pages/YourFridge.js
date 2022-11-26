@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
-import intro from "../assets/img/intro.jpg";
+import Salad from "../assets/img/salad.jpg";
 import IngredientAutocomplete from "../features/ingredients/IngredientAutocomplete";
 import IngredientsList from "../features/ingredients/IngredientsList";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,17 +64,17 @@ const YourFridge = () => {
   return (
     <>
       {error && <DisplayError {...error} handleClose={handleClose} />}
-      <Hero img={intro} mask={false}>
-        <Container>
-          <h1 className="font-custom display-1 text-center pt-5">
+      <Hero img={Salad} mask={true}>
+        <Container className="text-center textHero">
+          <h1 className="font-custom display-1 pt-5 text-white">
             What's in your frigde?
           </h1>
-          <p className="lead text-center pb-5">
-            Add ingredients to find out what you can cook with them.
+          <p className="pb-5 lead text-white" style={{ fontSize: "2.0rem" }}>
+            Add ingredients below to find out what you can cook with them.
           </p>
           <IngredientsList ingredients={ingredients} />
           <IngredientAutocomplete handleSearch={handleSearch} />
-          <p className="text-muted text-center pb-5">
+          <p className="pb-5 text-white">
             Non-vegan ingredients will not be included in the search.
           </p>
         </Container>

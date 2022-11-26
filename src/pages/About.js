@@ -2,19 +2,18 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
 import logo from "../assets/img/logo_200x200.png";
-import AboutImg from "../assets/img/spaghetti.jpg";
+import AboutImg from "../assets/img/woman-green.jpg";
 
 const About = () => {
   return (
     <>
-      <Hero img={AboutImg} mask={true} maskRgba="rgba(255, 255, 255, 0.2)">
-        <Container fluid>
-          <div className="text-center p-5 text-white">
-            <h3 className="font-custom">
-              If you don't want meat today, it's the best time for
-            </h3>
-            <h1 className="display-4 fw-bold text-uppercase">
-              A vegetarian day
+      <Hero img={AboutImg} mask={true}>
+        <Container fluid className="textHero">
+          <div className="text-center p-5">
+            <h1 className="font-custom display-3 text-center pt-5">
+              If you don't want meat today,
+              <br />
+              it's the best time for a vegetarian day
             </h1>
           </div>
         </Container>

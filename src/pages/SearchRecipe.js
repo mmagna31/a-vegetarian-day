@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Container, Form, InputGroup } from "react-bootstrap";
 import Hero from "../components/Hero";
-import imgRecipes from "../assets/img/recipes.jpg";
+import imgRecipes from "../assets/img/pasta.jpg";
 import RecipesSection from "../features/recipes/RecipesSection";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +20,7 @@ import DisplayError from "../components/DisplayError";
 import ButtonSearch from "../components/ButtonSearch";
 import { MdOutlineClear } from "react-icons/md";
 import useDisplayError from "../hooks/useDisplayError";
+import styled from "styled-components";
 
 const SearchRecipe = () => {
   const dispatch = useDispatch();
@@ -63,32 +64,26 @@ const SearchRecipe = () => {
       {error && (
         <DisplayError {...error} handleClose={() => dispatch(reset())} />
       )}
-      <Hero img={imgRecipes} mask={false}>
-        <Container>
-          <h1 className="font-custom display-1 text-center pt-5">
-            Search for your favorite recipe
+      <Hero img={imgRecipes} mask={true}>
+        <Container className="textHero">
+          <h1 className="font-custom display-1 text-center p-5">
+            Search for your favorite recipes
           </h1>
-          <InputGroup className="mb-1">
+          <InputGroup className="fixedWidthMd mb-5">
             <Form.Control
               type="text"
               value={input}
-              placeholder="Search..."
+              placeholder="Type to search recipes..."
               onChange={(e) => setInput(e.target.value)}
             />
             {input.length > 0 && (
-              <Button
-                variant=""
-                style={{
-                  borderTop: "1px solid #ced4da",
-                  borderBottom: "1px solid #ced4da",
-                  backgroundColor: "#fff",
-                }}
+              <DelButton
                 onClick={() => {
                   setInput("");
                 }}
               >
-                <MdOutlineClear />
-              </Button>
+                <MdOutlineClear size={20} />
+              </DelButton>
             )}
             <ButtonSearch handleSearch={handleSearch} isDisabled={isDisabled} />
           </InputGroup>
@@ -105,3 +100,13 @@ const SearchRecipe = () => {
 };
 
 export default SearchRecipe;
+
+const DelButton = styled.button`
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+`;

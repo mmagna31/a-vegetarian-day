@@ -46,7 +46,7 @@ const IngredientsList = ({ ingredients }) => {
   }, [ingredients]);
 
   return (
-    <ScrollWrapper>
+    <ScrollWrapper className="fixedWidthMd">
       <ScrollContainer ref={scrollContainerRef} id="ingredients">
         <ul>
           {ingredients.map((ingredient) => {

@@ -56,7 +56,7 @@ const IngredientAutocomplete = ({ handleSearch }) => {
 
   return (
     <>
-      <InputGroup className="mb-1">
+      <InputGroup className="fixedWidthMd mt-2 mb-2">
         <Form.Control
           type="text"
           value={input}
@@ -76,7 +76,6 @@ const IngredientAutocomplete = ({ handleSearch }) => {
           <ButtonSearch handleSearch={handleSearch} isDisabled={isDisabled} />
         )}
       </InputGroup>
-
       {input.length > 0 && (
         <HintsList hints={hints} handleClick={handleClick} />
       )}
