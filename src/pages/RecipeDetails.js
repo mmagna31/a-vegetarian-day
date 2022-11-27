@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Button, Container } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import Sanitized from "../components/Sanitized";
-
 import { BiCopyright } from "react-icons/bi";
 import { Col, Row } from "react-bootstrap/esm";
 import DisplayError from "../components/DisplayError";
@@ -19,6 +18,13 @@ const RecipeDetails = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ display: false, info: null });
 
+  const handleClose = () => {
+    setError({
+      ...error,
+      display: false,
+    });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,13 +40,6 @@ const RecipeDetails = () => {
     };
     fetchData();
   }, [id]);
-
-  const handleClose = () => {
-    setError({
-      ...error,
-      display: false,
-    });
-  };
 
   const {
     title,
@@ -67,6 +66,7 @@ const RecipeDetails = () => {
     <>
       {error.display && <DisplayError {...error} handleClose={handleClose} />}
       <Container>
+        <BackButton />
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
         <p className="text-center text-muted">
           Ideal for{" "}
@@ -97,8 +97,18 @@ const RecipeDetails = () => {
         <p className="text-center">
           <BiCopyright /> {creditsText}
         </p>
+        <BackButton />
       </Container>
     </>
+  );
+};
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <Button className="m-2" onClick={() => navigate(-1)}>
+      Back to recipes
+    </Button>
   );
 };
 

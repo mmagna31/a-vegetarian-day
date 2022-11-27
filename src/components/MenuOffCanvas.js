@@ -45,9 +45,15 @@ const MenuOffCanvas = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3 fs-3 text-black">
-              <WrappedLink to="/">What's in my fridge?</WrappedLink>
-              <WrappedLink to="/search-recipe">Recipes</WrappedLink>
-              <WrappedLink to="/about">About</WrappedLink>
+              <WrappedLink className="m-2" to="/">
+                What's in my fridge?
+              </WrappedLink>
+              <WrappedLink className="m-2" to="/search-recipe">
+                Recipes
+              </WrappedLink>
+              <WrappedLink className="m-2" to="/about">
+                About
+              </WrappedLink>
             </Nav>
             {isVisible && (
               <div className="d-flex justify-content-center my-5">

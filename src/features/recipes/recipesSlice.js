@@ -19,6 +19,14 @@ const initialState = {
   nextQuery: null,
 };
 
+const isFetchPending = (action) => {
+  return action.type.startsWith("recipes") && action.type.endsWith("/pending");
+};
+
+const isFetchRejected = (action) => {
+  return action.type.startsWith("recipes") && action.type.endsWith("/rejected");
+};
+
 const isFetchFullfilled = (action) => {
   return (
     action.type.endsWith("fetchByIngredients/fulfilled") ||
@@ -96,19 +104,13 @@ export const recipesSlice = createSlice({
         state.status = "idle";
         state.recipes = action.payload;
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state, action) => {
-          state.status = "loading";
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          state.status = "failed";
-          state.error = { display: true, info: { ...action.error } };
-        }
-      )
+      .addMatcher(isFetchPending, (state, action) => {
+        state.status = "loading";
+      })
+      .addMatcher(isFetchRejected, (state, action) => {
+        state.status = "failed";
+        state.error = { display: true, info: { ...action.error } };
+      })
       .addMatcher(isFetchFullfilled, (state, action) => {
         state.status = "idle";
         if (state.nextOffset === 0) {

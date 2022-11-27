@@ -5,12 +5,8 @@ const useDisplayError = (...args) => {
 
   useEffect(() => {
     setError(args.find((error) => error.display));
-    // if (errorRecipes.display) {
-    //   setErrorPage(errorRecipes);
-    // }
   }, [args]);
 
-  // return error;
   return error;
 };
 
