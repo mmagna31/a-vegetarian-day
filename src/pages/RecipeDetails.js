@@ -10,6 +10,7 @@ import Loading from "../components/Loading";
 import IngredientsList from "../features/recipes/IngredientsList";
 import InstructionsSteps from "../features/recipes/InstructionsSteps";
 import RecipeInfo from "../features/recipes/RecipeInfo";
+import WrappedLink from "../components/WrappedLink";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -58,13 +59,14 @@ const RecipeDetails = () => {
     );
   }
 
-  if (error?.info?.code === "ERR_BAD_REQUEST") {
-    return <Container>NO RECIPE FOUND</Container>;
+  if (error.info?.code === "ERR_BAD_REQUEST") {
+    return <NoRecipeFound />;
   }
 
   return (
     <>
       {error.display && <DisplayError {...error} handleClose={handleClose} />}
+
       <Container>
         <BackButton />
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
@@ -105,10 +107,22 @@ const RecipeDetails = () => {
 
 const BackButton = () => {
   const navigate = useNavigate();
+  console.log(navigate);
   return (
     <Button className="m-2" onClick={() => navigate(-1)}>
       Back to recipes
     </Button>
+  );
+};
+
+const NoRecipeFound = () => {
+  return (
+    <Container className="text-center">
+      <h1 className="font-custom display-1 pt-5 ">No recipe Found</h1>
+      <WrappedLink to="/">
+        <Button>Back to Home</Button>
+      </WrappedLink>
+    </Container>
   );
 };
 

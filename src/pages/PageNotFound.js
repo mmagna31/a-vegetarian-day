@@ -9,7 +9,7 @@ const PageNotFound = () => {
   return (
     <Container className="h-100 text-center">
       <h1 className="font-custom display-1 m-3">Oops!</h1>
-      <h2 className="lead display-3">
+      <h2 className="lead display-5">
         The page you're looking for does not exist
       </h2>
       <ImageWrapper
@@ -33,6 +33,6 @@ export default PageNotFound;
 
 const ImageWrapper = styled(Image)`
   @media screen and (min-width: 768px) {
-    width: 40%;
+    width: 30%;
   }
 `;

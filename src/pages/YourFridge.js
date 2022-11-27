@@ -10,6 +10,7 @@ import {
   selectIngredients,
   reset as resetIngredients,
   selectStatus as selectStatusHints,
+  cleanSelected,
 } from "../features/ingredients/ingredientsSlice";
 import {
   fetchRandom,
@@ -41,9 +42,10 @@ const YourFridge = () => {
 
   useEffect(() => {
     /* retrieves random recipes at the first render of the page */
-    if (ingredients.length === 0 && recipes.length === 0) {
-      dispatch(fetchRandom());
-    }
+    // if (ingredients.length === 0 && recipes.length === 0) {
+    dispatch(fetchRandom());
+    // }
+    if (selectIngredients.length > 0) dispatch(cleanSelected());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
