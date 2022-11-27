@@ -44,6 +44,7 @@ const YourFridge = () => {
     if (ingredients.length === 0 && recipes.length === 0) {
       dispatch(fetchRandom());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = useCallback(() => {
