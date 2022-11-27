@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Container, Form, InputGroup } from "react-bootstrap";
 import Hero from "../components/Hero";
 import imgRecipes from "../assets/img/pasta.jpg";
 import RecipesSection from "../features/recipes/RecipesSection";
@@ -39,6 +39,7 @@ const SearchRecipe = () => {
     if (!nextQuery) {
       dispatch(fetchRandom());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

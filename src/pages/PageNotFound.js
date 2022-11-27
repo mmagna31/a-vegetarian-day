@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import steamingPot from "../assets/img/steaming_pot.jpg";
 import WrappedLink from "../components/WrappedLink";
 import Image from "react-bootstrap/Image";
@@ -12,7 +12,6 @@ const PageNotFound = () => {
       <h2 className="lead display-3">
         The page you're looking for does not exist
       </h2>
-      {/* <img src={steamingPot} alt="Page not found" className="w-100" /> */}
       <ImageWrapper
         src={steamingPot}
         alt="Page not found"
