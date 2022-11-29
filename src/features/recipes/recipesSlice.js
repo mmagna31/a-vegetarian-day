@@ -13,8 +13,8 @@ const initialState = {
     info: null,
   },
   nextOffset: 0,
-  number: 1,
-  totalResults: 0,
+  number: 6,
+  totalResults: null,
   nextIngredients: [],
   nextQuery: null,
 };
@@ -103,6 +103,7 @@ export const recipesSlice = createSlice({
       .addCase(fetchRandom.fulfilled, (state, action) => {
         state.status = "idle";
         state.recipes = action.payload;
+        state.totalResults = null;
       })
       .addMatcher(isFetchPending, (state, action) => {
         state.status = "loading";

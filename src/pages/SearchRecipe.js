@@ -9,7 +9,6 @@ import {
   selectRecipes,
   selectStatus,
   selectTotalResults,
-  selectNextQuery,
   selectError,
   fetchByQueryFirst,
   cleanRecipes,
@@ -27,7 +26,6 @@ const SearchRecipe = () => {
   const recipesStatus = useSelector(selectStatus);
   const recipes = useSelector(selectRecipes);
   const totalRecipes = useSelector(selectTotalResults);
-  const nextQuery = useSelector(selectNextQuery);
   const errorRecipes = useSelector(selectError);
 
   const [input, setInput] = useState("");
@@ -36,9 +34,7 @@ const SearchRecipe = () => {
   const error = useDisplayError(errorRecipes);
 
   useEffect(() => {
-    if (!nextQuery) {
-      dispatch(fetchRandom());
-    }
+    dispatch(fetchRandom());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

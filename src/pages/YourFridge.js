@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
-import Salad from "../assets/img/salad.jpg";
+import imgIntro from "../assets/img/tomatoes.jpg";
 import IngredientAutocomplete from "../features/ingredients/IngredientAutocomplete";
 import IngredientsList from "../features/ingredients/IngredientsList";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,6 @@ const YourFridge = () => {
 
   useEffect(() => {
     /* retrieves random recipes at the first render of the page */
-    // if (ingredients.length === 0 && recipes.length === 0) {
     dispatch(fetchRandom());
     // }
     if (selectIngredients.length > 0) dispatch(cleanSelected());
@@ -67,7 +66,7 @@ const YourFridge = () => {
   return (
     <>
       {error && <DisplayError {...error} handleClose={handleClose} />}
-      <Hero img={Salad} mask={true}>
+      <Hero img={imgIntro} mask={true}>
         <Container className="text-center textHero">
           <h1 className="font-custom display-1 pt-5 text-white">
             What's in your frigde?

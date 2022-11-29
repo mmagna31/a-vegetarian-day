@@ -13,13 +13,11 @@ const RecipesSection = ({
   return (
     <Section>
       <TitleSection>Recipes</TitleSection>
-      <p className="text-muted text-center">
-        {totalRecipes > 0
-          ? `We have ${totalRecipes} recipes`
-          : recipes.length === 0
-          ? "No recipes found for selected ingredients"
-          : "Suggested"}
-      </p>
+      <RecipesSubtitles
+        recipesStatus={recipesStatus}
+        recipes={recipes}
+        totalRecipes={totalRecipes}
+      />
       <RecipesList
         recipes={recipes}
         onDispatch={handleDispatch}
@@ -32,11 +30,19 @@ const RecipesSection = ({
       ) : (
         ""
       )}
-      {recipes.length === 0
-        ? "no recipes-----------imposta immagine problema con primo rendering"
-        : ""}
     </Section>
   );
 };
 
 export default RecipesSection;
+
+const RecipesSubtitles = ({ recipesStatus, recipes, totalRecipes }) => {
+  return (
+    <p className="text-muted text-center">
+      {recipesStatus === "loading" ? "Loading" : ""}
+      {recipes.length > 0 && !totalRecipes ? "Suggested for you" : ""}
+      {totalRecipes > 0 ? `We have ${totalRecipes} recipes` : ""}
+      {totalRecipes === 0 ? `No recipe found` : ""}
+    </p>
+  );
+};
