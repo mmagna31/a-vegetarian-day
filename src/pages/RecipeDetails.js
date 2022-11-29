@@ -107,9 +107,8 @@ const RecipeDetails = () => {
 
 const BackButton = () => {
   const navigate = useNavigate();
-  console.log(navigate);
   return (
-    <Button className="m-2" onClick={() => navigate(-1)}>
+    <Button className="m-3" onClick={() => navigate(-1)}>
       Back to recipes
     </Button>
   );

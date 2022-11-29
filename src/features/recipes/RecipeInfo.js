@@ -25,7 +25,7 @@ const RecipeInfo = ({
   ];
 
   return (
-    <Container className="border rounded">
+    <Container className="border rounded bg-white">
       <Row>
         <Col xs={12} md={{ span: 6, order: 1 }} className="p-0">
           <ImgRecipe src={image} alt={title} />

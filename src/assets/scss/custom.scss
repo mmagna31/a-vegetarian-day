@@ -1,0 +1,52 @@
+// Override default variables before the import
+$primary: #008060;
+$secondary: #fdfaf6;
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+@font-face {
+  font-family: "Chalkboard";
+  src: local("Chalkboard"),
+    url("../../fonts/Chalkboard/Chalkboard-Regular.ttf") format("truetype");
+
+  font-weight: regular;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fdfaf6;
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .font-custom {
+    font-family: -apple-system, BlinkMacSystemFont, "Chalkboard",
+      "Roboto Condensed", sans-serif;
+  }
+
+  .justifyText {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .textHero {
+    text-shadow: 2px 2px 8px #000;
+    color: white;
+  }
+
+  @include media-breakpoint-up(md) {
+    .fixedWidthMd {
+      width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

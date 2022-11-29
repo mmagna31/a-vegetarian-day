@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import WrappedLink from "./WrappedLink";
-import Logo from "../assets/img/logo_200x200.png";
+import Logo from "../assets/img/logo_primary.png";
 
 const MenuOffCanvas = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,7 +20,9 @@ const MenuOffCanvas = () => {
               className="d-inline-block align-top"
               alt="A Vegetarian Day"
             />{" "}
-            <span className="fs-3 font-custom">A Vegetarian Day</span>
+            <span className="fs-3 font-custom text-primary">
+              A Vegetarian Day
+            </span>
           </Navbar.Brand>
         </WrappedLink>
         <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md" />

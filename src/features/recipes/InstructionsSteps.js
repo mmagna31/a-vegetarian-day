@@ -9,8 +9,8 @@ const InstructionsSteps = ({ analyzedInstructions }) => {
       <TitleSection>Instructions</TitleSection>
       <ListGroup className="text-center">
         {analyzedInstructions[0].steps.map((step) => (
-          <ListGroup.Item className="border-0" key={uuidv4()}>
-            <span className="text-muted fw-light">Step {step.number}</span>
+          <ListGroup.Item className="border-0 bg-secondary" key={uuidv4()}>
+            <span className="fw-light text-primary">Step {step.number}</span>
             <br />
             {step.step}
           </ListGroup.Item>

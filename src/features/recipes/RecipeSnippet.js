@@ -22,7 +22,7 @@ const RecipeSnippet = React.forwardRef(
     return (
       <Card ref={ref} className="shadow w-100 h-100">
         <Card.Img variant="top" src={image} className="shadow" />
-        <Card.Body>
+        <Card.Body className="bg-secondary">
           <Card.Title className="font-custom text-truncate text-center fs-3 text-primary">
             {title}
           </Card.Title>
@@ -37,7 +37,7 @@ const RecipeSnippet = React.forwardRef(
                 </p>
                 <Sanitized
                   className="justifyText"
-                  htmlString={summary ? truncate(summary, 200) : ""}
+                  htmlString={summary ? truncate(summary, 100) : ""}
                 />
               </Col>
             </Row>

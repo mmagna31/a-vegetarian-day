@@ -9,7 +9,7 @@ const IngredientsList = ({ extendedIngredients }) => {
       <TitleSection>Ingredients</TitleSection>
       <ListGroup className="text-center">
         {extendedIngredients.map((ingredient) => (
-          <ListGroup.Item key={uuidv4()} className="border-0">
+          <ListGroup.Item key={uuidv4()} className="border-0 bg-secondary">
             {ingredient.original}
           </ListGroup.Item>
         ))}

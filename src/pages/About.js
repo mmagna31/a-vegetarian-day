@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Hero from "../components/Hero";
-import logo from "../assets/img/logo_200x200.png";
+import Logo from "../assets/img/logo_primary.png";
 import AboutImg from "../assets/img/woman-green.jpg";
 
 const About = () => {
@@ -27,7 +27,7 @@ const About = () => {
           vegetarian dishes.
         </p>
         <img
-          src={logo}
+          src={Logo}
           style={{ width: "100px" }}
           alt="A Vegetarian Day"
           className="m-2"
