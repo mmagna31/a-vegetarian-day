@@ -46,6 +46,7 @@ const YourFridge = () => {
     /* retrieves random recipes at the first render of the page */
     /* It does not render if called from RecipeDetails page */
     if (!location?.state?.includes("/recipes/")) {
+      dispatch(resetRecipes());
       dispatch(fetchRandom());
 
       if (selectIngredients.length > 0) dispatch(cleanSelected());

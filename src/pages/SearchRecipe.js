@@ -13,7 +13,7 @@ import {
   fetchByQueryFirst,
   cleanRecipes,
   fetchByQueryNext,
-  reset,
+  reset as resetRecipes,
 } from "../features/recipes/recipesSlice";
 import DisplayError from "../components/DisplayError";
 import ButtonSearch from "../components/ButtonSearch";
@@ -38,6 +38,7 @@ const SearchRecipe = () => {
 
   useEffect(() => {
     if (!location?.state?.includes("/recipes/")) {
+      dispatch(resetRecipes());
       dispatch(fetchRandom());
     }
   }, [location, dispatch]);
@@ -63,7 +64,7 @@ const SearchRecipe = () => {
   return (
     <>
       {error && (
-        <DisplayError {...error} handleClose={() => dispatch(reset())} />
+        <DisplayError {...error} handleClose={() => dispatch(resetRecipes())} />
       )}
       <Hero img={imgRecipes} mask={true}>
         <Container className="textHero">
