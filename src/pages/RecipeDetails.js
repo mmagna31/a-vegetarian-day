@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Sanitized from "../components/Sanitized";
 import { BiCopyright } from "react-icons/bi";
 import { Col, Row } from "react-bootstrap/esm";
@@ -11,6 +11,7 @@ import IngredientsList from "../features/recipes/IngredientsList";
 import InstructionsSteps from "../features/recipes/InstructionsSteps";
 import RecipeInfo from "../features/recipes/RecipeInfo";
 import WrappedLink from "../components/WrappedLink";
+import BackButton from "../components/BackButton";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -69,6 +70,7 @@ const RecipeDetails = () => {
 
       <Container>
         <BackButton />
+
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
         <p className="text-center text-muted">
           Ideal for{" "}
@@ -102,15 +104,6 @@ const RecipeDetails = () => {
         <BackButton />
       </Container>
     </>
-  );
-};
-
-const BackButton = () => {
-  const navigate = useNavigate();
-  return (
-    <Button className="m-3" onClick={() => navigate(-1)}>
-      Back to recipes
-    </Button>
   );
 };
 

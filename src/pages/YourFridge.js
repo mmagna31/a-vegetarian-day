@@ -26,9 +26,11 @@ import {
 import DisplayError from "../components/DisplayError";
 import RecipesSection from "../features/recipes/RecipesSection";
 import useDisplayError from "../hooks/useDisplayError";
+import { useLocation } from "react-router-dom";
 
 const YourFridge = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const ingredients = useSelector(selectIngredients);
   const errorIngredients = useSelector(selectErrorIngredients);
@@ -42,11 +44,13 @@ const YourFridge = () => {
 
   useEffect(() => {
     /* retrieves random recipes at the first render of the page */
-    dispatch(fetchRandom());
-    // }
-    if (selectIngredients.length > 0) dispatch(cleanSelected());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    /* It does not render if called from RecipeDetails page */
+    if (!location?.state?.includes("/recipes/")) {
+      dispatch(fetchRandom());
+
+      if (selectIngredients.length > 0) dispatch(cleanSelected());
+    }
+  }, [location, dispatch]);
 
   const handleSearch = useCallback(() => {
     const ingredientsName = ingredients.map((ingredient) => ingredient.name);

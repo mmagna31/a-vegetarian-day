@@ -2,9 +2,12 @@ import React, { useCallback, useEffect, useRef } from "react";
 import RecipeSnippet from "./RecipeSnippet";
 import { Col, Container, Row } from "react-bootstrap";
 import WrappedLink from "../../components/WrappedLink";
+import { useLocation } from "react-router-dom";
 
 const RecipesList = ({ recipes, totalRecipes, onDispatch }) => {
   const recipeRef = useRef(null); // ref assegnato ad ultima ricetta per eseguire intersectionCallback
+
+  const location = useLocation();
 
   const intersectionCallback = useCallback(
     (entries) => {
@@ -43,7 +46,7 @@ const RecipesList = ({ recipes, totalRecipes, onDispatch }) => {
           const lastId = recipes[recipes.length - 1].id;
           return (
             <Col key={id}>
-              <WrappedLink to={`/recipes/${id}`}>
+              <WrappedLink to={`/recipes/${id}`} state={location.pathname}>
                 <RecipeSnippet
                   ref={id === lastId ? recipeRef : null}
                   {...recipe}

@@ -35,7 +35,10 @@ const RecipeInfo = ({
             {shortInfo.map((info) => {
               return (
                 info.text && (
-                  <span className="text-capitalize font-custom fs-3">
+                  <span
+                    key={info.text}
+                    className="text-capitalize font-custom fs-3"
+                  >
                     {info.icon} {info.text}
                   </span>
                 )

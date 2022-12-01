@@ -20,23 +20,27 @@ import ButtonSearch from "../components/ButtonSearch";
 import { MdOutlineClear } from "react-icons/md";
 import useDisplayError from "../hooks/useDisplayError";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const SearchRecipe = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const recipesStatus = useSelector(selectStatus);
   const recipes = useSelector(selectRecipes);
   const totalRecipes = useSelector(selectTotalResults);
   const errorRecipes = useSelector(selectError);
 
+  const error = useDisplayError(errorRecipes);
+
   const [input, setInput] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const error = useDisplayError(errorRecipes);
-
   useEffect(() => {
-    dispatch(fetchRandom());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!location?.state?.includes("/recipes/")) {
+      dispatch(fetchRandom());
+    }
+  }, [location, dispatch]);
 
   useEffect(() => {
     /* used to manage placeholder input and search button */
