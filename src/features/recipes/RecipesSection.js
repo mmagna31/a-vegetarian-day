@@ -39,10 +39,15 @@ export default RecipesSection;
 const RecipesSubtitles = ({ recipesStatus, recipes, totalRecipes }) => {
   return (
     <p className="text-muted text-center">
-      {recipesStatus === "loading" ? "Loading" : ""}
-      {recipes.length > 0 && !totalRecipes ? "Suggested for you" : ""}
-      {totalRecipes > 0 ? `We have ${totalRecipes} recipes` : ""}
-      {totalRecipes === 0 ? `No recipe found` : ""}
+      {recipesStatus === "loading"
+        ? "Loading"
+        : recipes.length > 0 && !totalRecipes
+        ? "Suggested for you"
+        : totalRecipes > 0
+        ? `We have ${totalRecipes} recipes`
+        : totalRecipes === 0
+        ? `No recipe found`
+        : ""}
     </p>
   );
 };
