@@ -5,7 +5,7 @@ const instance = axios.create({
   params: {
     apiKey: process.env.REACT_APP_SPOONACOLAR_API_KEY,
   },
-  timeout: 3000,
+  timeout: 5000,
 });
 
 export const searchIngredients = async (value, number) => {
