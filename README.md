@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+## Requirements
+
+In order to start this application you need of a valid apiKey of Spoonacular api.\
+Save it in variable called REACT_APP_SPOONACOLAR_API_KEY into .env file.
+
+Eg.
+_REACT_APP_SPOONACOLAR_API_KEY = "xxxxxxxxxxxxxxxxxxxxx"_
+
 ## Available Scripts
 
 In the project directory, you can run:
