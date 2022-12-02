@@ -74,7 +74,7 @@ const RecipeDetails = () => {
         <h1 className="font-custom text-center my-3 text-primary">{title}</h1>
         <p className="text-center text-muted">
           Ideal for{" "}
-          {occasions ? (
+          {occasions.length > 0 ? (
             <span className="text-capitalize">{occasions.join(", ")}</span>
           ) : (
             "any occasions"
