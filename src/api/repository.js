@@ -3,7 +3,7 @@ import axios from "axios";
 const instance = axios.create({
   baseURL: "https://api.spoonacular.com",
   params: {
-    apiKey: process.env.REACT_APP_SPOONACOLAR_API_KEY,
+    apiKey: process.env.REACT_APP_SPOONACULAR_API_KEY,
   },
   timeout: 5000,
 });
