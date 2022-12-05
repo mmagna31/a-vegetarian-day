@@ -1,6 +1,6 @@
 # Demo
 
-You can view a demo of the project at this URL: https://avegetarianday.netlify.app [https://avegetarianday.netlify.app](https://avegetarianday.netlify.app)
+You can view a demo of the project at this URL: [https://avegetarianday.netlify.app](https://avegetarianday.netlify.app)
 
 # Getting Started with Create React App and Redux
 
