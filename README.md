@@ -9,10 +9,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Requirements
 
 In order to start this application you need of a valid apiKey of Spoonacular api.\
-Save it in variable called REACT_APP_SPOONACOLAR_API_KEY into .env file.
+Save it in variable called REACT_APP_SPOONACULAR_API_KEY into .env file.
 
 Eg.
-_REACT_APP_SPOONACOLAR_API_KEY = "xxxxxxxxxxxxxxxxxxxxx"_
+_REACT_APP_SPOONACULAR_API_KEY = "xxxxxxxxxxxxxxxxxxxxx"_
 
 ## Available Scripts
 
